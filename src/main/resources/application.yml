@@ -35,19 +35,30 @@ spring:
               args:
                 name: RESERVATION-SERVICE
                 fallbackuri: forward:/reservationServiceFallBackMethod
-hystrix:
-  command:
-    fallbackcmd:
-      execution:
-        isolation:
-          thread:
-            timeoutInMilliseconds: 4000
 
 management:
+  security:
+    enabled: false
   endpoints:
     web:
       exposure:
-        include: hystrix.stream
+        include: health
+  health:
+    circuitbreakers:
+      enabled: true
+  endpoint:
+    health:
+      show-details: always
+
+resilience4j:
+  circuitbreaker:
+    backends:
+      hotelServiceFallBackMethod:
+        register-health-indicator: true
+      guestServiceFallBackMethod:
+        register-health-indicator: true
+      reservationServiceFallBackMethod:
+        register-health-indicator: true
 
 
 
