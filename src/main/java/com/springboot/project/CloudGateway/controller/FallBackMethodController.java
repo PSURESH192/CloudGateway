@@ -15,4 +15,9 @@ public class FallBackMethodController {
     public String guestServiceFallBackMethod(){
         return "Guest Service took longer time than expected.Please try again after sometime";
     }
+
+    @GetMapping("/reservationServiceFallBackMethod")
+    public String reservationServiceFallBackMethod(){
+        return "Reservation Service took longer time than expected.Please try again after sometime";
+    }
 }

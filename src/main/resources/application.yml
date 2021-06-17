@@ -15,6 +15,24 @@ spring:
               args:
                 name: HOTEL-SERVICE
                 fallbackuri: forward:/hotelServiceFallBackMethod
+        - id: GUEST-SERVICE
+          uri: "http://localhost:9003"
+          predicates:
+            - Path= /guests/**
+          filters:
+            - name: CircuitBreaker
+              args:
+                name: GUEST-SERVICE
+                fallbackuri: forward:/guestServiceFallBackMethod
+        - id: RESERVATION-SERVICE
+          uri: "http://localhost:9004"
+          predicates:
+            - Path= /reservations/**
+          filters:
+            - name: CircuitBreaker
+              args:
+                name: RESERVATION-SERVICE
+                fallbackuri: forward:/reservationServiceFallBackMethod
 hystrix:
   command:
     fallbackcmd:
