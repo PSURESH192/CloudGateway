@@ -1,4 +1,4 @@
-package com.springboot.project.CloudGateway.controller;
+package com.springboot.project.cloudgateway.controller;
 
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import org.springframework.web.bind.annotation.GetMapping;

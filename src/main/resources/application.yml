@@ -5,6 +5,8 @@ spring:
     name: API-GATEWAY
   zipkin:
     base-url: http://localhost:9411
+  main:
+    web-application-type: reactive
   cloud:
     gateway:
       routes:
@@ -59,6 +61,12 @@ resilience4j:
         register-health-indicator: true
       reservationServiceFallBackMethod:
         register-health-indicator: true
+
+springbootwebfluxjjwt.password.encoder.secret: mysecret
+springbootwebfluxjjwt.password.encoder.iteration: 33
+springbootwebfluxjjwt.password.encoder.keylength: 256
+springbootwebfluxjjwt.jjwt.secret: ThisIsSecretForJWTHS512SignatureAlgorithmThatMUSTHave64ByteLength
+springbootwebfluxjjwt.jjwt.expiration: 28800
 
 
 
