@@ -11,7 +11,7 @@ spring:
     gateway:
       routes:
         - id: HOTEL-SERVICE
-          uri: "http://localhost:9001"
+          uri: lb://HOTEL-SERVICE
           predicates:
             - Path= /hotels/**
           filters:
@@ -20,7 +20,7 @@ spring:
                 name: HOTEL-SERVICE
                 fallbackuri: forward:/hotelServiceFallBackMethod
         - id: GUEST-SERVICE
-          uri: "http://localhost:9003"
+          uri: lb://GUEST-SERVICE
           predicates:
             - Path= /guests/**
           filters:
@@ -29,7 +29,7 @@ spring:
                 name: GUEST-SERVICE
                 fallbackuri: forward:/guestServiceFallBackMethod
         - id: RESERVATION-SERVICE
-          uri: "http://localhost:9004"
+          uri: lb://RESERVATION-SERVICE
           predicates:
             - Path= /reservations/**
           filters:
