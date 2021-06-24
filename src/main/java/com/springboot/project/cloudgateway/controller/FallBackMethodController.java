@@ -28,4 +28,11 @@ public class FallBackMethodController {
     public String reservationServiceFallBackMethod(Exception e){
         return "Reservation Service took longer time than expected.Please try again after sometime";
     }
+
+    @CircuitBreaker(name = "eventSourceCqrsServiceFallBackMethod", fallbackMethod = "eventSourceCqrsServiceFallBackMethod")
+    @GetMapping("/eventSourceCqrsServiceFallBackMethod")
+    @ApiImplicitParam(name = "Authorization", value = "Access Token", required = true, allowEmptyValue = false, paramType = "header", dataTypeClass = String.class, example = "Bearer access_token")
+    public String eventSourceCqrsServiceFallBackMethod(Exception e){
+        return "Event Source CQRS Service took longer time than expected.Please try again after sometime";
+    }
 }

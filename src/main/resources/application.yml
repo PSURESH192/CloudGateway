@@ -37,6 +37,15 @@ spring:
               args:
                 name: RESERVATION-SERVICE
                 fallbackuri: forward:/reservationServiceFallBackMethod
+        - id: EVENT-SOURCE-CQRS-AXON
+          uri: lb://EVENT-SOURCE-CQRS-AXON
+          predicates:
+            - Path= /payments/**
+          filters:
+            - name: CircuitBreaker
+              args:
+                name: EVENT-SOURCE-CQRS-AXON
+                fallbackuri: forward:/eventSourceCqrsServiceFallBackMethod
 
 management:
   security:
@@ -60,6 +69,8 @@ resilience4j:
       guestServiceFallBackMethod:
         register-health-indicator: true
       reservationServiceFallBackMethod:
+        register-health-indicator: true
+      eventSourceCqrsServiceFallBackMethod:
         register-health-indicator: true
 
 springbootwebfluxjjwt.password.encoder.secret: mysecret

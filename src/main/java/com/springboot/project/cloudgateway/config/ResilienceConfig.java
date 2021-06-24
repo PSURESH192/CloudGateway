@@ -51,4 +51,18 @@ public class ResilienceConfig {
                     builder.slidingWindowType(COUNT_BASED);
                 });
     }
+
+    @Bean
+    public CircuitBreakerConfigCustomizer eventSourceCqrsServiceFallBackMethod() {
+        return CircuitBreakerConfigCustomizer
+                .of("eventSourceCqrsServiceFallBackMethod", builder -> {
+                    builder.slidingWindowSize(5);
+                    builder.failureRateThreshold(3);
+                    builder.waitDurationInOpenState(Duration.ofSeconds(10));
+                    builder.slowCallDurationThreshold(Duration.ofSeconds(5));
+                    builder.slowCallRateThreshold(100);
+                    builder.permittedNumberOfCallsInHalfOpenState(2);
+                    builder.slidingWindowType(COUNT_BASED);
+                });
+    }
 }
